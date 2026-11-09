@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException
 from models import Task
-from schemas import TaskCreate
+from schemas import TaskCreate, TaskDelete
 from repository import TaskRepository
 
 class TaskService:
@@ -16,3 +16,8 @@ class TaskService:
             raise HTTPException(status_code=422, detail="O título da task não pode ser vazio.")
         new_task = Task(titulo=data.titulo, descricao=data.descricao)
         return await self.repository.create_task(db, new_task)
+
+    async def delete_task(self, db: AsyncSession, id: int):
+        deleted = await self.repository.delete_task(db, id)
+        if not deleted:
+            raise HTTPException(status_code=404, detail="Task não encontrada.")

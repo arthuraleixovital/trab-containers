@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_db
 import schemas
@@ -14,3 +14,7 @@ async def get_all_tasks(db: AsyncSession = Depends(get_db)):
 @router.post("/", response_model=schemas.TaskResponse, status_code=201)
 async def create_task(data: schemas.TaskCreate, db: AsyncSession = Depends(get_db)):
     return await task_service.create_task(db, data)
+
+@router.delete("/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_task(task_id: int, db: AsyncSession = Depends(get_db)):
+    await task_service.delete_task(db, task_id)
