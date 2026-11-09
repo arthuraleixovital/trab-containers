@@ -3,19 +3,29 @@ services:
     image: mysql:8.4
     container_name: todo-mysql
     restart: unless-stopped
-
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: todo_db
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-
     ports:
-      - "3307:3306"
-
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  backend:
+    build: ./back-end
+    container_name: backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=mysql+aiomysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/todo_db
+    volumes:
+      - ./back-end:/app
+    depends_on:
+      - db:
+        condition: service_healthy
 
 volumes:
   mysql_data:
