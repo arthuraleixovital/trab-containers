@@ -1,6 +1,6 @@
 cryptography==43.0.3
 fastapi[standard]
 uvicorn
-sqlalchemy
+sqlalchemy[asyncio]==2.0.30
 aiomysql
 pydantic
