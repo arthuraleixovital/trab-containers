@@ -18,3 +18,7 @@ async def create_task(data: schemas.TaskCreate, db: AsyncSession = Depends(get_d
 @router.delete("/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_task(task_id: int, db: AsyncSession = Depends(get_db)):
     await task_service.delete_task(db, task_id)
+
+@router.patch("/{task_id}", response_model=schemas.TaskResponse)
+async def update_task(task_id: int, data: schemas.TaskUpdate, db: AsyncSession = Depends(get_db)):
+    return await task_service.update_task(db, task_id, data)

@@ -21,3 +21,15 @@ class TaskRepository:
             await db.commit()
             return True
         return False
+
+    async def update_task(self, db: AsyncSession, task_id: int, update_data: dict) -> Task | None:
+        response = await db.execute(select(Task).where(Task.id == task_id))
+        task_row = response.scalars().first()
+        if not task_row:
+            return None
+        for key, value in update_data.items():
+            setattr(task_row, key, value)
+        await db.commit()
+        await db.refresh(task_row)
+        return task_row
+        
