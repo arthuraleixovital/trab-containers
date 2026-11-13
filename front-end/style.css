@@ -1,0 +1,32 @@
+:root{
+    --bg-base: black;
+    --bg-containers: rgba(19, 9, 80, 0.8);
+    --bg-border: rgb(4, 0, 106);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    background-color: var(--bg-base);
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+}
+
+.area {
+    background-color: var(--bg-containers);
+    width: 80%;
+    border: 1px solid var(--bg-border);
+    border-radius: 8px;
+    padding: 20px;
+}
