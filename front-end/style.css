@@ -1,13 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root{
     --bg-base: black;
     --bg-containers: rgba(19, 9, 80, 0.8);
     --bg-border: rgb(4, 0, 106);
+
+    --bg-verde: rgb(0, 153, 255);
+    --bg-red: red;
 }
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: "Roboto", sans-serif;
 }
 
 .container {
@@ -29,4 +35,59 @@
     border: 1px solid var(--bg-border);
     border-radius: 8px;
     padding: 20px;
+}
+
+h1 {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+}
+
+.preenchimento{
+    padding: 1.5rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.625rem;
+}
+
+.preenchimento .forms{
+    width: 100%;
+    min-height: 3rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.preenchimento .forms input{
+    flex: 1;
+    min-width: 0;
+    height:100%;
+    font-size: 20px;
+}
+
+.preenchimento .forms button {
+    padding: 0.6rem 1rem;
+    min-height: 2.75rem;
+    border-radius: 24px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+    cursor: pointer;
+
+}
+
+.preenchimento .forms #add {
+    background-color: var(--bg-verde);
+}
+
+.preenchimento .forms #apagar {
+    background-color: var(--bg-red);
+}
+
+.preenchimento #erro {
+    display: none;
+    color: var(--bg-red);
 }
