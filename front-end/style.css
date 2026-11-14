@@ -1,12 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
-    --bg-base: black;
-    --bg-containers: rgba(19, 9, 80, 0.8);
-    --bg-border: rgb(4, 0, 106);
+:root {
+    /* Fundos */
+    --bg-base: #0B1220;
+    --bg-containers: #172338;
+    --bg-border-area: #30425E;
 
-    --bg-verde: rgb(0, 153, 255);
-    --bg-red: red;
+    /* Tarefas */
+    --bg-task: #233149;
+    --bg-border-tasks: #344860;
+
+    /* Cores de destaque */
+    --bg-blue: #38BDF8;
+    --bg-verde: #22C55E;
+    --bg-red: #DC3545;
+
+    /* Textos */
+    --text-primary: #EDF3FC;
+    --text-secondary: #9BAEC7;
+    --text-dark: #081321;
+    --text-white: #FFFFFF;
+
+    /* Campos de entrada */
+    --bg-input: #0E1A2D;
+    --border-input: #40516B;
 }
 
 * {
@@ -18,21 +35,22 @@
 
 .container {
     background-color: var(--bg-base);
-    width: 100vw;
-    height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
     padding: 20px;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 30px;
+    gap: 1.5rem;
 }
 
 .area {
     background-color: var(--bg-containers);
-    width: 80%;
-    border: 1px solid var(--bg-border);
+    color: var(--text-primary);
+    width: 90%;
+    border: 1px solid var(--bg-border-area);
     border-radius: 8px;
     padding: 20px;
 }
@@ -59,14 +77,36 @@ h1 {
     gap: 1rem;
 }
 
-.preenchimento .forms input{
+.preenchimento .forms input {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-input);
+    border-radius: 0.5rem;
+
     flex: 1;
     min-width: 0;
-    height:100%;
-    font-size: 20px;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.125rem;
+}
+
+.preenchimento .forms input::placeholder {
+    color: var(--text-secondary);
+}
+
+.preenchimento .forms input:focus {
+    outline: 2px solid var(--bg-blue);
+    outline-offset: 2px;
+}
+
+.preenchimento .forms button:hover,
+.lista .tarefa .excluir-task:hover {
+    filter: brightness(1.15);
 }
 
 .preenchimento .forms button {
+    border: none;
+    color: var(--text-dark);
     padding: 0.6rem 1rem;
     min-height: 2.75rem;
     border-radius: 24px;
@@ -80,14 +120,75 @@ h1 {
 }
 
 .preenchimento .forms #add {
-    background-color: var(--bg-verde);
+    background-color: var(--bg-blue);
 }
 
 .preenchimento .forms #apagar {
     background-color: var(--bg-red);
+    color: var(--text-white);
 }
 
 .preenchimento #erro {
     display: none;
     color: var(--bg-red);
+}
+
+.preenchimento #erro.ativo{
+    display: inline;
+}
+
+.lista{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lista .tarefa{
+    background-color: var(--bg-task);
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--bg-border-tasks);
+    border-radius: 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lista .tarefa .task {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lista .tarefa .task span {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.lista .tarefa .task .concluido{
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    accent-color: var(--bg-verde);
+    cursor: pointer;
+}
+
+.lista .tarefa .excluir-task {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--bg-red);
+    border: none;
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}
+
+.lista .tarefa .excluir-task span{
+    color: var(--text-white);
 }

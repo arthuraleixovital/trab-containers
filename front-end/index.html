@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CHECK LIST</title>
     <script src="scrpts.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete" />
 </head>
 <body>
     <div class="container">
@@ -23,12 +24,19 @@
         </div>
 
         <div class="area lista">
-            <div class="lista">
-                <div id="tarefa">
-                    <input type="checkbox" name="" id="concluido">
-                    <h2>Correr</h2>
-                    <button type="button" id="excluir-task">APAGAR</button>
+            <div class="tarefa">
+                <div class="task">
+                    <input type="checkbox" name="check" class="concluido">
+                    <span>Correr</span>
                 </div>
+                <button type="button" class="excluir-task"><span class="material-symbols-outlined">delete</span></button>
+            </div>
+            <div class="tarefa">
+                <div class="task">
+                    <input type="checkbox" name="" class="concluido">
+                    <span>Correr</span>
+                </div>
+                <button type="button" class="excluir-task"><span class="material-symbols-outlined">delete</span></button>
             </div>
         </div>
     </div>
