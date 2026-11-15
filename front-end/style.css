@@ -55,6 +55,12 @@
     padding: 20px;
 }
 
+.inicial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 h1 {
     font-size: clamp(1.5rem, 3vw, 3rem);
 }
@@ -67,6 +73,7 @@ h1 {
     justify-content: center;
     gap: 0.625rem;
 }
+
 
 .preenchimento .forms{
     width: 100%;
@@ -174,7 +181,13 @@ h1 {
     cursor: pointer;
 }
 
-.lista .tarefa .excluir-task {
+.lista .tarefa .task .concluido:checked + .texto-tarefa {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.excluir-task {
     width: 2.5rem;
     height: 2.5rem;
 
@@ -185,10 +198,13 @@ h1 {
     background-color: var(--bg-red);
     border: none;
     border-radius: 0.5rem;
-
     cursor: pointer;
+
+    color: var(--text-white);
 }
 
-.lista .tarefa .excluir-task span{
-    color: var(--text-white);
+.excluir-task .icone-lixeira {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: block;
 }
