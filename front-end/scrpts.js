@@ -17,10 +17,6 @@ function load() {
 function render() {
     lista.innerHTML = ""
     for (const task of tasks) {
-        if (task.trim() === "") {
-            erro.classList.add("ativo")
-        }
-        else {
             lista.innerHTML += `<div class="tarefa">
                     <div class="task">
                         <input type="checkbox" name="check" class="concluido">
@@ -28,8 +24,6 @@ function render() {
                     </div>
                     <button type="button" class="excluir-task"><span class="material-symbols-outlined">delete</span></button>
                 </div>`
-
-                erro.classList.remove("ativo")
             }
 
             const botoes = document.querySelectorAll(".excluir-task")
@@ -41,18 +35,28 @@ function render() {
                     render()
                 })
             })
-    }
 }
 
 
-adicionar.addEventListener('submit', () => {
+adicionar.addEventListener('submit', (event) => {
+    event.preventDefault()
+
     const novaTarefa = campo.value
 
-    tasks.push(novaTarefa)
-    save(tasks)
+    if (novaTarefa.trim() === "") {
+        erro.classList.add("ativo")
+    }
 
-    campo.value = ""
-    render()
+    else {
+        tasks.push(novaTarefa)
+        save(tasks)
+    
+        erro.classList.remove("ativo")
+
+        campo.value = ""
+        render()
+    }
+
 })
 
 apagarTasks.addEventListener('click', () => {
