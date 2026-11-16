@@ -13,6 +13,8 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./bd/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - containerNetwork
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -28,9 +30,25 @@ services:
       - DATABASE_URL=mysql+aiomysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/todo_db
     volumes:
       - ./back-end:/app
+    networks:
+      - containerNetwork
     depends_on:
       mysql:
         condition: service_healthy
+  frontend:
+    image: nginx:alpine
+    container_name: frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./front-end:/usr/share/nginx/html:ro
+    networks:
+      - containerNetwork
 
 volumes:
   mysql_data:
+
+networks:
+  containerNetwork:
+    driver: bridge
