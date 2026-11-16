@@ -2,6 +2,7 @@ const campo = document.querySelector("#campo")
 const adicionar = document.getElementById("add")
 const apagarTasks = document.querySelector("#apagar")
 const lista = document.querySelector(".lista")
+const erro = document.querySelector("#erro")
 const CHAVE = "tasks"
 let tasks = load()
 
@@ -16,15 +17,33 @@ function load() {
 function render() {
     lista.innerHTML = ""
     for (const task of tasks) {
-        lista.innerHTML += `<div class="tarefa">
-                <div class="task">
-                    <input type="checkbox" name="check" class="concluido">
-                    <span class="texto-tarefa">${task}</span>
-                </div>
-                <button type="button" class="excluir-task"><span class="material-symbols-outlined">delete</span></button>
-            </div>`
+        if (task.trim() === "") {
+            erro.classList.add("ativo")
+        }
+        else {
+            lista.innerHTML += `<div class="tarefa">
+                    <div class="task">
+                        <input type="checkbox" name="check" class="concluido">
+                        <span class="texto-tarefa">${task}</span>
+                    </div>
+                    <button type="button" class="excluir-task"><span class="material-symbols-outlined">delete</span></button>
+                </div>`
+
+                erro.classList.remove("ativo")
+            }
+
+            const botoes = document.querySelectorAll(".excluir-task")
+            
+            botoes.forEach((botao, indice) => {
+                botao.addEventListener("click", () => {
+                    tasks.splice(indice, 1)
+                    save(tasks)
+                    render()
+                })
+            })
     }
 }
+
 
 adicionar.addEventListener('click', () => {
     const novaTarefa = campo.value
@@ -36,12 +55,12 @@ adicionar.addEventListener('click', () => {
     render()
 })
 
-// apagarTasks.addEventListener('click', () => {
-//     tasks = ""
-//     save(tasks)
+apagarTasks.addEventListener('click', () => {
+    tasks = []
+    save(tasks)
 
-//     campo.value=""
-//     render()
-// })
+    campo.value=""
+    render()
+})
 
 render()
