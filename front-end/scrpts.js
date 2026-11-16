@@ -1,5 +1,5 @@
 const campo = document.querySelector("#campo")
-const adicionar = document.getElementById("add")
+const adicionar = document.querySelector(".forms")
 const apagarTasks = document.querySelector("#apagar")
 const lista = document.querySelector(".lista")
 const erro = document.querySelector("#erro")
@@ -45,7 +45,7 @@ function render() {
 }
 
 
-adicionar.addEventListener('click', () => {
+adicionar.addEventListener('submit', () => {
     const novaTarefa = campo.value
 
     tasks.push(novaTarefa)
